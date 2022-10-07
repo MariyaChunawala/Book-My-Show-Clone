@@ -1,9 +1,6 @@
 import React from "react";
 import HeroSlider from "react-slick";
-
-// CSS
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { NextArrow, PrevArrow } from "./Arrows.component";
 
 const HeroCarousel = () => {
     const settingsLG = {
@@ -13,7 +10,9 @@ const HeroCarousel = () => {
         centerPadding: "300px",
         infinite: true,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     };
     const settings = {
         arrows: true,
@@ -21,7 +20,9 @@ const HeroCarousel = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     };
     const img = ["https://images.unsplash.com/photo-1664575600850-c4b712e6e2bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
         "https://images.unsplash.com/photo-1664742583396-da58971366a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -34,8 +35,8 @@ const HeroCarousel = () => {
             <div className="lg:hidden">
                 <HeroSlider {...settings}>
                     {img.map((image) => (
-                        <div className="w-full h-96 md:h-64 py-3">
-                            <img src={image} alt="" className="w-full h-full rounded-md" />
+                        <div className="w-full h-56 md:h-80 py-3">
+                            <img src={image} alt="" className="w-full h-full" />
                         </div>
                     ))}
                 </HeroSlider>
@@ -43,7 +44,7 @@ const HeroCarousel = () => {
             <div className="hidden lg:block">
                 <HeroSlider {...settingsLG}>
                     {img.map((image) => (
-                        <div className="w-full h-80 px-2 py-3">
+                        <div className="w-full h-96 px-2 py-3">
                             <img src={image} alt="" className="w-full h-full rounded-md" />
                         </div>
                     ))}
