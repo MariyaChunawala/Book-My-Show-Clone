@@ -5,8 +5,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
-        bms: 
+      colors: {
+        bms:
         {
           50: '#edf1fc',
           100: '#d3d4e1',
@@ -18,6 +18,7 @@ module.exports = {
           700: '#363849',
           800: '#21222e',
           900: '#0a0a16',
+          1000: '#2b3147',
         }
       }
     },
