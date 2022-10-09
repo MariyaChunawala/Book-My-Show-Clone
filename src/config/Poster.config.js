@@ -1,5 +1,5 @@
 const settings = {
-    infinity: false,
+    infinite: false,
     autoplay: false,
     slidesToShow: 5,
     slidesToScroll: 2,
@@ -10,7 +10,7 @@ const settings = {
             settings: {
                 slidesToShow: 3,
                 slidesToScroll: 2,
-                infinity: true
+                infinite: true
             }
         },
         {
@@ -24,7 +24,7 @@ const settings = {
         {
             breakpoints: 480,
             settings: {
-                slidesToShow: 2,
+                slidesToShow: 3,
                 slidesToScroll: 1,
             }
         }
