@@ -5,7 +5,7 @@ import Poster from '../components/Poster/Poster.component'
 const PlaysPage = () => {
     return (
         <>
-            <div className='container mx-auto px-4'>
+            <div className='container mx-auto px-4 my-8'>
                 <div className='w-full lg:flex lg:flex-row-reverse'>
                     <div className=' lg:w-3/4'>
                         <h2 className='text-2xl font-bold mb-4'>Plays In Bharuch</h2>
