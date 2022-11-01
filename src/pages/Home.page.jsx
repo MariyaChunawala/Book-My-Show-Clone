@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EntertainmentCardSlider from "../components/Entertainment/EntertainmentCard.component";
 import PosterSlider from "../components/PosterSlider/PosterSlider.component";
 
 // config
 import TempImages from "../../src/config/TempImages.config"
+import axios from "axios";
 
 const HomePage = () => {
+    const [popularMovies, setPopularMovies] = useState([]);
+    useEffect(() => {
+        const requestPopularMovies = async () => {
+            const getPopularMovies = await axios.get('/movie/popular');
+            setPopularMovies(getPopularMovies.data.results);
+        }
+        requestPopularMovies();
+    }, [])
     return <>
         <div className="flex flex-col gap-16">
             <div className="container mx-auto px-auto">
@@ -22,7 +31,7 @@ const HomePage = () => {
                             className="w-full h-full"
                         />
                     </div>
-                    <PosterSlider images={TempImages} title="Premiere" subtitle="Brand new release every Friday" isDark={true} />
+                    <PosterSlider images={popularMovies} title="Premiere" subtitle="Brand new release every Friday" isDark={true} />
                 </div>
             </div>
             <div className="container mx-auto px-4">
