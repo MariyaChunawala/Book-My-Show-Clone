@@ -14,7 +14,7 @@ export const MovieLayout = (props) => {
             setMovie(getMovieData.data);
         }
         requestMovieData();
-    }, []);
+    }, [id, setMovie]);
     return (
         <>
             <MovieNavbar />
