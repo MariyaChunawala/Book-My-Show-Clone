@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaCcVisa, FaCcApplePay } from 'react-icons/fa'
 import MovieHero from '../components/MovieHero/MovieHero.component'
 import Cast from '../components/Cast/Cast.component'
@@ -7,8 +7,10 @@ import PosterSlider from "../components/PosterSlider/PosterSlider.component";
 // config
 import TempImages from "../../src/config/TempImages.config"
 import MoviePoster from "../config/MoviePoster.config";
+import { MovieContext } from '../context/movie.context';
 
 const MoviePage = () => {
+    const { movie } = useContext(MovieContext);
     return (
         <>
             <MovieHero />
@@ -16,9 +18,7 @@ const MoviePage = () => {
                 <div className='flex flex-col items-start gap-3'>
                     <h2 className='text-gray-800 font-bold text-2xl'>About the movie</h2>
                     <p className='text-lg'>
-                        Set in a fictional village of Dakshina Kannada, Kantara is a visual grandeur that brings alive the traditional
-                        culture of Kambla and Bhootha Kola. It is believed that Demigods are the guardians and their energies encircle
-                        the village.
+                        {movie.overview}
                     </p>
                 </div>
                 <div className='my-8'>

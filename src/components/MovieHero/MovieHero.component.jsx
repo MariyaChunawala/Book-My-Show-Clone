@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MovieInfo from './MovieInfo.component';
+import { MovieContext } from '../../context/movie.context';
 
 const MovieHero = () => {
+    const { movie } = useContext(MovieContext);
     return (
         <>
             <div>
@@ -13,7 +15,7 @@ const MovieHero = () => {
                         </div>
                     </div>
                     <div className='w-full h-56 bg-black bg-opacity-50 z-10 absolute bottom-0' />
-                    <img src='https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/medium/kantara-hindi-et00342025-1665304124.jpg'
+                    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                         alt='poster' className='w-full h-full'
                     />
                 </div>
@@ -25,7 +27,7 @@ const MovieHero = () => {
                             <MovieInfo />
                         </div>
                     </div>
-                    <img src='https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/medium/kantara-hindi-et00342025-1665304124.jpg'
+                    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                         alt='poster' className='w-full h-full'
                     />
                 </div>
@@ -39,7 +41,7 @@ const MovieHero = () => {
                     />
                     <div className='absolute z-30 left-36 top-10 flex items-center gap-10'>
                         <div className='w-64 h-96'>
-                            <img src='https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-OTUlICAxOWsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00342025-bfznknnpek-portrait.jpg'
+                            <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                                 alt='Poster'
                                 className='w-full h-full rounded-xl'
                             />
@@ -48,7 +50,7 @@ const MovieHero = () => {
                             <MovieInfo />
                         </div>
                     </div>
-                    <img src='https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/kantara-hindi-et00342025-1665304124.jpg'
+                    <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                         alt='poster' className='w-full h-full' />
                 </div>
             </div>
