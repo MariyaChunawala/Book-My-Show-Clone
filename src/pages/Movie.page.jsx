@@ -110,15 +110,15 @@ const MoviePage = () => {
                 <div className='my-8'>
                     <hr />
                 </div>
-                <div className='my-8 flex flex-col items-start gap-3'>
+                <div className='my-8'>
                     <h2 className='text-gray-800 font-bold text-2xl'>Cast & Crew</h2>
                     <Slider {...settingsCast}>
                         {cast.map((castData) => {
-                            console.log(castData)
-                            return (<Cast image={`https://image.tmdb.org/t/p/original/${castData.profile_path}`}
-                                castName={castData.original_name}
-                                role={castData.character}
-                            />)
+                            return (
+                                <Cast image={`https://image.tmdb.org/t/p/original/${castData.profile_path}`}
+                                    castName={castData.original_name}
+                                    role={castData.character}
+                                />)
                         })}
                     </Slider>
                 </div>
