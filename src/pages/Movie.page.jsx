@@ -1,16 +1,76 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaCcVisa, FaCcApplePay } from 'react-icons/fa'
 import MovieHero from '../components/MovieHero/MovieHero.component'
 import Cast from '../components/Cast/Cast.component'
 import PosterSlider from "../components/PosterSlider/PosterSlider.component";
 
 // config
-import TempImages from "../../src/config/TempImages.config"
 import MoviePoster from "../config/MoviePoster.config";
 import { MovieContext } from '../context/movie.context';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Slider from 'react-slick';
 
 const MoviePage = () => {
     const { movie } = useContext(MovieContext);
+    const [cast, setCast] = useState([]);
+    const [similarMovies, setSimilarMovies] = useState([]);
+    const [recommendedMovies, setRecommendedMovies] = useState([]);
+    const { id } = useParams();
+    useEffect(() => {
+        const requestCast = async () => {
+            const getCast = await axios.get(`/movie/${id}/credits`);
+            console.log(getCast.data.cast);
+            setCast(getCast.data.cast);
+        }
+        requestCast();
+    }, [id]);
+    useEffect(() => {
+        const requestSimilarMovies = async () => {
+            const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+            setSimilarMovies(getSimilarMovies.data.results);
+        }
+        requestSimilarMovies();
+    }, [id]);
+    useEffect(() => {
+        const requestRecommendedMovies = async () => {
+            const getRecommendedMovies = await axios.get(`/movie/${id}/recommendations`);
+            setRecommendedMovies(getRecommendedMovies.data.results);
+        }
+        requestRecommendedMovies();
+    }, [id]);
+    const settingsCast = {
+        infinite: false,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 4,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 3,
+                    infinite: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    };
     return (
         <>
             <MovieHero />
@@ -52,32 +112,27 @@ const MoviePage = () => {
                 </div>
                 <div className='my-8 flex flex-col items-start gap-3'>
                     <h2 className='text-gray-800 font-bold text-2xl'>Cast & Crew</h2>
-                    <div className='flex flex-wrap gap-4'>
-                        <Cast image="https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/rishab-shetty-1064313-15-08-2018-04-55-18.jpg"
-                            castName="Rishab Shetty"
-                            role="Actor"
-                        />
-                        <Cast image="https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/sapthami-gowda-2008392-29-02-2020-12-23-17.jpg"
-                            castName="Sapthami Gowda"
-                            role="Actor"
-                        />
-                        <Cast image="https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/achyuth-kumar-19493-06-10-2016-04-07-39.jpg"
-                            castName="Achyuth Kumar"
-                            role="Actor"
-                        />
-                    </div>
+                    <Slider {...settingsCast}>
+                        {cast.map((castData) => {
+                            console.log(castData)
+                            return (<Cast image={`https://image.tmdb.org/t/p/original/${castData.profile_path}`}
+                                castName={castData.original_name}
+                                role={castData.character}
+                            />)
+                        })}
+                    </Slider>
                 </div>
                 <div className='my-8'>
                     <hr />
                 </div>
                 <div className='my-8'>
-                    <PosterSlider config={MoviePoster} images={TempImages} title="You might also like" isDark={false} />
+                    <PosterSlider config={MoviePoster} images={similarMovies} title="You might also like" isDark={false} />
                 </div>
                 <div className='my-8'>
                     <hr />
                 </div>
                 <div className='my-8'>
-                    <PosterSlider config={MoviePoster} images={TempImages} title="BMS XCLUSIV" isDark={false} />
+                    <PosterSlider config={MoviePoster} images={recommendedMovies} title="BMS XCLUSIV" isDark={false} />
                 </div>
             </div>
         </>
