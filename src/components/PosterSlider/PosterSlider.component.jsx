@@ -11,8 +11,8 @@ const PosterSlider = (props) => {
                 <h3 className={`${props.isDark ? "text-white" : "text-gray-800"} text-2xl font-bold `}>{props.title}</h3>
                 <p className={`${props.isDark ? "text-white" : "text-gray-700"} text-md`}>{props.subtitle}</p>
             </div>
-            <Slider {...config}>
-                {props.images.map((image) => <Poster {...image} isDark={props.isDark} />)}
+            <Slider {...config} className="poster-slider">
+                {props.images.map((image) => <Poster {...image} isDark={props.isDark} data-movie-id={props.id} />)}
             </Slider>
         </>
     )
